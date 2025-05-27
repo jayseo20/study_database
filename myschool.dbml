@@ -1,0 +1,79 @@
+Table departments {
+  id           int(4)        [pk, increment, not null, note: "학과번호"]
+  dname        varchar(100)  [not null, note: "학과명"]
+  loc          varchar(100)  [not null, note: "위치"]
+  phone        varchar(15)   [not null, note: "전화번호"]
+  email        varchar(100)  [not null, note: "이메일 주소"]
+  established  year(4)       [not null, note: "설립 연도"]
+  homepage     varchar(255)  [note: "홈페이지 주소"]
+
+  Note: "학과"
+}
+
+Table professors {
+  id            int(11)                      [pk, increment, not null, note: "교수번호"]
+  name          varchar(50)                 [not null, note: "이름"]
+  user_id       varchar(50)                 [not null, note: "아이디"]
+  position      varchar(20)     [not null, note: "직급(교수, 부교수, 조교수, 전임강사)"]
+  sal           int(10)                     [not null, note: "급여"]
+  hiredate      datetime                    [not null, note: "입사일"]
+  comm          int(11)                     [note: "보직수당"]
+  email         varchar(100)                [note: "이메일 주소"]
+  phone         varchar(15)                 [note: "전화번호"]
+  photo_url     varchar(255)                [note: "프로필 사진 URL"]
+  status        varchar(10)     [not null, note: "재직 상태(재직, 휴직, 퇴직)"]
+  department_id int(11)                     [not null, note: "소속 학과번호"]
+
+  Note: "교수"
+}
+
+Table students {
+  studno         int          [pk, increment, not null, note: "학생번호"]
+  name           varchar(50)  [not null, note: "이름"]
+  userid         varchar(50)  [not null, note: "아이디"]
+  grade          int          [not null, note: "학년"]
+  idnum          char(64)     [not null, note: "주민등록번호 (SHA2 해시)"]
+  birthdate      datetime     [not null, note: "생년월일"]
+  phone          varchar(13)  [not null, note: "전화번호"]
+  height         int          [not null, note: "키"]
+  weight         int          [not null, note: "몸무게"]
+  email          varchar(100) [note: "이메일 주소"]
+  gender         varchar(2)   [note: "성별 (남, 여)"]
+  status         varchar(10)  [note: "학적 상태 (재학, 휴학, 졸업, 퇴학)"]
+  photo_url      varchar(255) [note: "프로필 사진 경로"]
+  admission_date date         [note: "입학일"]
+  graduation_date date        [note: "졸업일"]
+  department_id  int          [note: "소속 학과번호"]
+  professor_id   int          [note: "지도교수번호"]
+
+  Note: "학생"
+}
+
+
+Table subjects {
+  id             int         [pk, increment, not null, note: "과목번호"]
+  name           varchar(100) [not null, note: "과목명"]
+  credit         int         [not null, note: "학점"]
+  department_id  int         [note: "개설 학과"]
+  professor_id   int         [note: "담당 교수"]
+
+  Note: "과목"
+}
+
+
+Table enrollments {
+  student_id   int   [pk, not null, note: "학생번호"]
+  subject_id   int   [pk, not null, note: "과목번호"]
+  enroll_date  date  [not null, note: "수강신청일"]
+  score        int   [note: "성적 점수 (100점 만점)"]
+
+  Note: "수강"
+}
+
+
+Ref: students.department_id > departments.id
+Ref: students.professor_id > professors.id
+Ref: enrollments.student_id > students.studno
+Ref: enrollments.subject_id > subjects.id
+Ref: subjects.department_id > departments.id
+Ref: subjects.professor_id > professors.id

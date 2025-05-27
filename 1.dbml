@@ -1,0 +1,31 @@
+Table loan {
+  id           int         [pk, increment, note: "대출 번호"]
+  member_id    int         [not null, ref: > members.id, note: "대출한 회원"]
+  book_id      int         [not null, ref: > books.id, note: "대출된 도서"]
+  loan_date    datetime    [not null, default: `CURRENT_DATE`, note: "대출일시"]
+  due_date     date        [not null, note: "반납 예정일"]
+  return_date  date        [note: "실제 반납일"]
+  status loan_status       [not null, default: 'A', note: "대출상태(A=대출중, B=반납완료, C=연체)"]
+  fine_amount  decimal(10,2) [default: 0, note: "연체료"]
+  auto_renewal boolean     [default: 0, note: "반납일 자동 연장 여부"]
+  notes        text        [note: "메모(특이사항)"]
+  Note: '도서 대출'
+}
+
+TABLE members {
+  id INT [pk, increment, note: "회원번호"]
+  name VARCHAR(50) [not null, note: "회원이름"]
+  note: "회원"  
+}
+
+TABLE books {
+  id INT [pk, increment, note: "도서번호"]
+  title VARCHAR(100) [not null, note: "도서이름"]
+  note: "도서"
+}
+
+ENUM loan_status {
+  A [note:  "대출중"]
+  B [note: "반납완료"]
+  C [note: "연체"]
+}
