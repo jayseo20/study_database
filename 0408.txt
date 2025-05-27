@@ -1,0 +1,285 @@
+SELECT id,  name, sal FROM professors WHERE sal BETWEEN 400 AND 500 ORDER BY sal DESC;
+
+ DESCRIBE students;
+
+
+SELECT  id, name, sal
+FROM 
+  professors
+WHERE 
+  sal >= 400
+ORDER BY 
+  sal DESC
+LIMIT 3;
+
+
+SELECT 
+  id, 
+  name, 
+  grade, 
+  gender, 
+  status
+FROM 
+  students
+WHERE 
+  professor_id is NULL
+ORDER BY 
+  grade;
+  
+  
+  SELECT 
+  name, 
+  grade, 
+  gender, 
+  height
+FROM 
+  students
+WHERE 
+  grade = 3 
+  AND gender = '여'
+ORDER BY 
+  height DESC
+LIMIT 5;
+
+SELECT 
+  id, 
+  name, 
+  credit
+FROM 
+  subjects
+  WHERE
+  credit NOT IN (2, 3)
+ORDER BY 
+  name ASC;
+  
+SELECT 
+  id, 
+  name, 
+  comm
+FROM 
+  professors
+WHERE 
+  comm IS NULL
+ORDER BY 
+  id DESC;
+
+
+<<<<<연습문제>>>>>>
+
+1.
+SELECT 
+  LOWER(dname) AS dname
+FROM 
+  departments
+WHERE 
+  LENGTH(dname) >= 10;
+  
+2. 
+SELECT 
+  CONCAT(LEFT(name, 3), '-', credit) AS subject_code
+FROM 
+  subjects;
+
+3.
+SELECT 
+  SUBSTRING(phone, 4, 4) AS middle_digits
+FROM 
+  students;
+
+
+4. ??
+  SELECT 
+  CONCAT(
+  RPAD(dname, 15, ' ') ,
+  LPAD(('-', phone), 10, ' ') ) AS result
+FROM 
+  departments;
+  
+5.??
+SELECT 
+  CONCAT(
+    UPPER(SUBSTRING_INDEX(email, '@', 1)), 
+    ':', 
+    FORMAT(sal * 10000, 2)
+  ) AS USERID : 급여
+FROM 
+  professors;
+  
+  
+  
+  
+  
+실습
+  
+    SELECT name,  height,  ABS(height-170) AS 키차이 FROM students
+  WHERE grade = 4 
+  ORDER BY height DESC 
+  LIMIT 0,  5;
+  
+  
+  SELECT name,  weight, height, 
+  ROUND(weight / POWER(height / 100,  2),  2) AS BMI
+  FROM students 
+  WHERE grade = 1  
+  ORDER BY
+  BMI ASC;
+  
+  
+SELECT name,  grade,  gender,  height,  weight,  phone 
+FROM students
+WHERE MOD(grade,  2) = 0
+ORDER BY weight DESC
+LIMIT 0,  3;
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+  <<<연습 2>>>
+  
+1. 
+
+SELECT 
+  ROUND(POW(height, 2) / weight, 2) AS 건강지수,
+  CASE
+    WHEN POW(height, 2) / weight >= 35 THEN '우수'
+    WHEN POW(height, 2) / weight >= 30 THEN '양호'
+    ELSE '주의'
+  END AS 건강등급
+FROM 
+  students;
+  
+  
+  
+  2. 
+  SELECT
+ABS( weight - 60) 
+  AS '차이', 
+  FLOOR(weight / 10) *10
+  AS '몸무게구간'
+    FROM
+  students
+  ORDER BY 
+  차이 ASC
+LIMIT 5;
+
+
+
+
+3.
+SELECT
+  CASE
+    WHEN height >= 180 THEN '장신'
+    WHEN height >= 160 THEN '보통'
+    ELSE '단신'
+  END AS '키등급',
+
+  CASE
+    WHEN MOD(id, 2) = 0 THEN '짝수'
+    ELSE '홀수'
+  END AS '번호유형'
+FROM 
+  students;
+
+4.
+
+SELECT 
+  CASE
+    WHEN gender IS NULL THEN '미입력'
+    WHEN gender = '남' THEN 'Male'
+    WHEN gender = '여' THEN 'Female'
+    ELSE '기타'
+  END AS '성별표시'
+FROM 
+  students;
+  
+  
+  5. 
+  
+  SELECT 
+  IFNULL(
+    CASE 
+      WHEN height < 170 THEN '작음'
+      ELSE NULL
+    END,
+    '경고'
+  ) AS '키상태'
+FROM 
+  students;
+  
+  
+  
+  
+  SELECT 
+  ANIMAL_ID
+FROM 
+  ANIMAL_INS
+WHERE 
+  NAME IS NULL
+ORDER BY 
+  ANIMAL_ID;
+
+
+SELECT 
+  ANIMAL_ID, 
+  NAME
+FROM 
+  ANIMAL_INS
+WHERE 
+  INTAKE_CONDITION = 'Sick'
+ORDER BY 
+  ANIMAL_ID;
+  
+  
+  
+  SELECT 
+  FACTORY_ID, 
+  FACTORY_NAME, 
+  ADDRESS
+FROM 
+  FOOD_FACTORY
+WHERE 
+  ADDRESS LIKE '강원도%'
+ORDER BY 
+  FACTORY_ID;
+
+
+  SELECT 
+  ID, 
+  EMAIL, 
+  FIRST_NAME, 
+  LAST_NAME
+FROM 
+  DEVELOPER_INFOS
+WHERE 
+  SKILL_1 = 'Python' 
+  OR SKILL_2 = 'Python' 
+  OR SKILL_3 = 'Python'
+ORDER BY 
+  ID;
+
+  
+학생의 성별이 남자일 경우, 키가 170cm이하이면 '경고'라는 문자열로 대체하여 '키상태' 컬럼에 출력하시오.
+
+mariadb -uroot -p --host=localhost --port=9090
+use myschool;
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+cd /d C:\Users\SEO\workspace_web3\02_DATABASE
+mariadb -uroot –p --port=9090 < myschool-dump.sql
+mariadb -uroot -p --host=localhost --port=9090 < myschool-regacy-dump.sql
+
+myschool-regacy-dump.sql
+
+SELECT id,  name,  grade FROM students WHERE grade = 1;
+
+desc 테이블이름;
+
+
+call sp_table_info_study();
+call sp_table_info_programmers();
+
+
+
+SELECT name, position, sal * 12 + 100 AS salary FROM professors;
+
+SELECT name,  position,  sal,  status FROM professors ORDER BY sal ASC;
+
+SELECT dname,  loc,  established FROM departments ORDER BY established DESC;
+
+SELECT grade,  name,  gender FROM students ORDER BY grade ASC,  name ASC;
+
+SELECT name,  position,  user_id,  sal FROM professors ORDER BY sal DESC LIMIT 0,  5;
+
+SELECT id,  dname,  loc FROM departments LIMIT 9,  3;
+
+
+SELECT name,  position,  sal * 12 + 200 AS bonus_salary FROM professors; 
+
+
+SELECT name,  gender,  grade FROM students ORDER By grade DESC,  name ASC;
+
+SELECT name,  sal,  position FROM professors ORDER by sal ASC;
+
+SELECT name AS '이름' ,  gender AS '성별' , grade AS '학년' FROM students;
+
+
+SELECT dname,  loc,  established -1900 AS '연차' FROM departments;
+
+
+SELECT 
+  ANIMAL_ID, 
+  NAME
+FROM 
+  ANIMAL_INS
+ORDER BY 
+  ANIMAL_ID;
+  
+  
+
+FROM 
+  ANIMAL_INS
+ORDER BY 
+  ANIMAL_ID;
+
+  ORDER BY 
+  NAME ASC, 
+  DATETIME DESC;
+  
+  
+  
+SELECT 
+  FLAVOR
+FROM 
+  FIRST_HALF
+ORDER BY 
+  TOTAL_ORDER DESC,
+  SHIPMENT_ID ASC;
+
+SELECT 
+  NAME
+FROM 
+  ANIMAL_INS
+ORDER BY 
+  DATETIME ASC
+LIMIT 1;
+  
+  
+SELECT 
+  ID, 
+  LENGTH
+FROM 
+  FISH_INFO
+WHERE 
+  LENGTH IS NOT NULL
+ORDER BY 
+  LENGTH DESC, 
+  ID ASC
+LIMIT 10;
+
+
+cd d/ C:\mariadb-11.4.5-winx64\bin
+mariadb -u root -p --port=9090
+
+
+
+
